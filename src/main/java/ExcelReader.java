@@ -58,52 +58,35 @@ public class ExcelReader {
 
         // Create a DataFormatter to format and get each cell's value as String
         DataFormatter dataFormatter = new DataFormatter();
+        
+        
+        foundPromovido(sheet, dataFormatter);
 
-        /*
-        // 1. You can obtain a rowIterator and columnIterator and iterate over them
-        System.out.println("\n\nIterating over Rows and Columns using Iterator\n");
-        Iterator<Row> rowIterator = sheet.rowIterator();
-        while (rowIterator.hasNext()) {
-            Row row = rowIterator.next();
-
-            // Now let's iterate over the columns of the current row
-            Iterator<Cell> cellIterator = row.cellIterator();
-
-            while (cellIterator.hasNext()) {
-                Cell cell = cellIterator.next();
-                String cellValue = dataFormatter.formatCellValue(cell);
-                System.out.print(cellValue + "\t");
-            }
-            System.out.println();
-        }
-         */
-        // KEVIN DAVID 
-        // ZENAIDA     QUEZADA        MERINO
-        // MERINO          QUEZADA          ZENAIDA
-        // QUEZADA  MERINO ZENAIDA
-        String nombre = "ZENAIDA";
+        
+        // Closing the workbook
+        workbook.close();
+    }
+    
+    
+    private static void foundPromovido (Sheet sheet, DataFormatter dataFormatter){
+        
+         String nombre = "ZENAIDA";
         String paterno = "QUEZADA";
         String materno = "MERINO";
 
-        String foundNombre = "";
+        
+        String foundNombre  = "";
         String foundPaterno = "";
         String foundMaterno = "";
-
-        boolean nombreInNOMBRES = false;
-        boolean nombreInPATERNOS = false;
-        boolean nombreInMATERNOS = false;
-
-        boolean paternoInNOMBRES = false;
-        boolean paternoInPATERNOS = false;
-        boolean paternoInMATERNOS = false;
-
-        boolean maternoInNOMBRES = false;
-        boolean maternoInPATERNOS = false;
-        boolean maternoInMATERNOS = false;
-
-        boolean NOMBRES = false;
-        boolean PATERNOS = false;
-        boolean MATERNOS = false;
+        
+        String foundUrbanizacion = "";
+        String foundSeccion = "";
+        
+        
+        boolean nombreFound = false;
+        boolean paternoFound = false;
+        boolean maternoFound = false;
+      
 
         // 2. Or you can use a for-each loop to iterate over the rows and columns
         System.out.println("\n\nLoop\n");
@@ -117,226 +100,75 @@ public class ExcelReader {
                 String cellValue = dataFormatter.formatCellValue(cell);
 
                 if (cellColumnIndex == 2) {
-
-                    //System.out.print(cellValue + "\t");
-                    if (cellValue.equals(nombre)) {
-
-                        if (foundNombre.isEmpty()) {
-                            nombreInNOMBRES = true;
-                            foundNombre = cellValue;
-                        }
-
-                    } else {
-                        if (foundNombre.isEmpty()) {
-                            nombreInNOMBRES = false;
-
-                            foundNombre = "";
-                        }
-
-                    }
-
-                    // System.out.print(cellValue + "\t");
-                    if (cellValue.equals(paterno)) {
-                        if (foundPaterno.isEmpty()) {
-                            paternoInNOMBRES = true;
-                            foundPaterno = cellValue;
-                        }
-                    } else {
-                        if (foundPaterno.isEmpty()) {
-                            paternoInNOMBRES = false;
-
-                            foundPaterno = "";
-                        }
-
-                    }
-
-                    if (cellValue.equals(materno)) {
-                        if (foundMaterno.isEmpty()) {
-                            maternoInNOMBRES = true;
-                            foundMaterno = cellValue;
-                        }
-                    } else {
-                        if (foundMaterno.isEmpty()) {
-                            paternoInNOMBRES = false;
-                            foundMaterno = "";
-                        }
-
-                    }
-
+                    foundNombre = cellValue;
                 }
 
                 if (cellColumnIndex == 3) {
-
-                    //System.out.print(cellValue + "\t");
-                    if (cellValue.equals(nombre)) {
-                        if (foundNombre.isEmpty()) {
-                            nombreInPATERNOS = true;
-                            foundNombre = cellValue;
-                        }
-                    } else {
-
-                        if (foundNombre.isEmpty()) {
-                            nombreInPATERNOS = false;
-
-                            foundNombre = "";
-                        }
-
-                    }
-
-                    if (cellValue.equals(paterno)) {
-
-                        if (foundPaterno.isEmpty()) {
-                            paternoInPATERNOS = true;
-                            foundPaterno = cellValue;
-                        }
-                    } else {
-
-                        if (foundPaterno.isEmpty()) {
-                            paternoInPATERNOS = false;
-
-                            foundPaterno = "";
-                        }
-                    }
-
-                    if (cellValue.equals(materno)) {
-                        if (foundMaterno.isEmpty()) {
-                            maternoInPATERNOS = true;
-                            foundMaterno = cellValue;
-                        }
-                    } else {
-                        if (foundMaterno.isEmpty()) {
-                            maternoInPATERNOS = false;
-
-                            foundMaterno = "";
-                        }
-
-                    }
-
+                    foundPaterno = cellValue;
                 }
-
+                
                 if (cellColumnIndex == 4) {
-
-                    //System.out.print(cellValue + "\t");
-                    if (cellValue.equals(nombre)) {
-                        if (foundNombre.isEmpty()) {
-                            nombreInMATERNOS = true;
-                            foundNombre = cellValue;
-                        }
-                    } else {
-                        if (foundNombre.isEmpty()) {
-                            nombreInMATERNOS = false;
-
-                            foundNombre = "";
-                        }
-                    }
-
-                    if (cellValue.equals(paterno)) {
-                        if (foundPaterno.isEmpty()) {
-                            paternoInMATERNOS = true;
-                            foundPaterno = cellValue;
-                        }
-                    } else {
-                        if (foundPaterno.isEmpty()) {
-                            paternoInMATERNOS = false;
-
-                            foundPaterno = "";
-                        }
-                    }
-
-                    if (cellValue.equals(materno)) {
-                        if (foundMaterno.isEmpty()) {
-                            maternoInMATERNOS = true;
-                            foundMaterno = cellValue;
-                        }
-                    } else {
-                        if (foundMaterno.isEmpty()) {
-                            maternoInMATERNOS = false;
-
-                            foundMaterno = "";
-                        }
-
-                    }
-
+                   foundMaterno = cellValue;
                 }
-
+                
+                if (cellColumnIndex == 6) {
+                   foundUrbanizacion = cellValue;
+                }
+                
+                if (cellColumnIndex == 8) {
+                   foundSeccion = cellValue;
+                }
             }
-
-            if (nombreInNOMBRES || nombreInPATERNOS || nombreInMATERNOS) {
-
-                NOMBRES = true;
+            
+            if(nombre.equals(foundNombre) || nombre.equals(foundPaterno) || nombre.equals(foundMaterno)){
+            
+                nombreFound = true;
+            
             }
-
-            if (paternoInNOMBRES || paternoInPATERNOS || paternoInMATERNOS) {
-
-                PATERNOS = true;
+            
+            if(paterno.equals(foundNombre) || paterno.equals(foundPaterno) || paterno.equals(foundMaterno)){
+            
+                paternoFound = true;
+            
             }
-
-            if (maternoInNOMBRES || maternoInPATERNOS || maternoInMATERNOS) {
-
-                MATERNOS = true;
+            
+            if(materno.equals(foundNombre) || materno.equals(foundPaterno) || materno.equals(foundMaterno)){
+            
+                maternoFound = true;
+            
             }
+            
+           
+        
 
-            if (NOMBRES && PATERNOS && MATERNOS) {
+            if (nombreFound && paternoFound && maternoFound) {
                 //System.out.print(cellValue + "\t");
 
-                System.out.print(foundNombre + "\t" + foundPaterno + "\t" + foundMaterno);
-                  System.out.println();
+                System.out.print("| "+foundNombre + "\t" + foundPaterno + "\t" + foundMaterno + " |\t| " + foundUrbanizacion + " |\t| " + foundSeccion + "|");
+                System.out.println();
 
             }
 
             foundNombre = "";
             foundPaterno = "";
             foundMaterno = "";
-
-            nombreInNOMBRES = false;
-            nombreInPATERNOS = false;
-            nombreInMATERNOS = false;
-
-            paternoInNOMBRES = false;
-            paternoInPATERNOS = false;
-            paternoInMATERNOS = false;
-
-            maternoInNOMBRES = false;
-            maternoInPATERNOS = false;
-            maternoInMATERNOS = false;
-
-            NOMBRES = false;
-            PATERNOS = false;
-            MATERNOS = false;
-
-       
+            
+            foundUrbanizacion = "";
+            foundSeccion = "";
+            
+            nombreFound = false;
+            paternoFound = false;
+            maternoFound = false;
+            
+            
+            
         }
-
-      
-        // Closing the workbook
-        workbook.close();
+    
     }
 
-    private static void printCellValue(Cell cell) {
-        switch (cell.getCellTypeEnum()) {
-            case BOOLEAN:
-                System.out.print(cell.getBooleanCellValue());
-                break;
-            case STRING:
-                System.out.print(cell.getRichStringCellValue().getString());
-                break;
-            case NUMERIC:
-                if (DateUtil.isCellDateFormatted(cell)) {
-                    System.out.print(cell.getDateCellValue());
-                } else {
-                    System.out.print(cell.getNumericCellValue());
-                }
-                break;
-            case FORMULA:
-                System.out.print(cell.getCellFormula());
-                break;
-            case BLANK:
-                System.out.print("");
-                break;
-            default:
-                System.out.print("");
-        }
 
-        System.out.print("\t");
+    private static void readCSV(){
     }
+    
+    
 }
