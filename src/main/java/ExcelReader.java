@@ -1,3 +1,4 @@
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 
@@ -8,10 +9,10 @@ import java.util.Iterator;
 /**
  * Created by rajeevkumarsingh on 18/12/17.
  */
-
 public class ExcelReader {
+
     public static final String SAMPLE_XLS_FILE_PATH = "./sample-xls-file.xls";
-    public static final String SAMPLE_XLSX_FILE_PATH = "./sample-xlsx-file.xlsx";
+    public static final String SAMPLE_XLSX_FILE_PATH = "./estructura_29_may.xlsx";
 
     public static void main(String[] args) throws IOException, InvalidFormatException {
 
@@ -25,8 +26,8 @@ public class ExcelReader {
            =============================================================
            Iterating over all the sheets in the workbook (Multiple ways)
            =============================================================
-        */
-
+         */
+ /*
         // 1. You can obtain a sheetIterator and iterate over it
         Iterator<Sheet> sheetIterator = workbook.sheetIterator();
         System.out.println("Retrieving Sheets using Iterator");
@@ -40,9 +41,9 @@ public class ExcelReader {
         for(Sheet sheet: workbook) {
             System.out.println("=> " + sheet.getSheetName());
         }
-
+         */
         // 3. Or you can use a Java 8 forEach wih lambda
-        System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
+        System.out.println("IMPRIMIENDO HOJAS DE EL EXCEL DE ESTRUCTURA");
         workbook.forEach(sheet -> {
             System.out.println("=> " + sheet.getSheetName());
         });
@@ -51,14 +52,14 @@ public class ExcelReader {
            ==================================================================
            Iterating over all the rows and columns in a Sheet (Multiple ways)
            ==================================================================
-        */
-
+         */
         // Getting the Sheet at index zero
         Sheet sheet = workbook.getSheetAt(0);
 
         // Create a DataFormatter to format and get each cell's value as String
         DataFormatter dataFormatter = new DataFormatter();
 
+        /*
         // 1. You can obtain a rowIterator and columnIterator and iterate over them
         System.out.println("\n\nIterating over Rows and Columns using Iterator\n");
         Iterator<Row> rowIterator = sheet.rowIterator();
@@ -75,26 +76,238 @@ public class ExcelReader {
             }
             System.out.println();
         }
+         */
+        // KEVIN DAVID 
+        // ZENAIDA     QUEZADA        MERINO
+        // MERINO          QUEZADA          ZENAIDA
+        // QUEZADA  MERINO ZENAIDA
+        String nombre = "ZENAIDA";
+        String paterno = "QUEZADA";
+        String materno = "MERINO";
+
+        String foundNombre = "";
+        String foundPaterno = "";
+        String foundMaterno = "";
+
+        boolean nombreInNOMBRES = false;
+        boolean nombreInPATERNOS = false;
+        boolean nombreInMATERNOS = false;
+
+        boolean paternoInNOMBRES = false;
+        boolean paternoInPATERNOS = false;
+        boolean paternoInMATERNOS = false;
+
+        boolean maternoInNOMBRES = false;
+        boolean maternoInPATERNOS = false;
+        boolean maternoInMATERNOS = false;
+
+        boolean NOMBRES = false;
+        boolean PATERNOS = false;
+        boolean MATERNOS = false;
 
         // 2. Or you can use a for-each loop to iterate over the rows and columns
-        System.out.println("\n\nIterating over Rows and Columns using for-each loop\n");
-        for (Row row: sheet) {
-            for(Cell cell: row) {
+        System.out.println("\n\nLoop\n");
+        for (Row row : sheet) {
+
+            for (Cell cell : row) {
+
+                int cellColumnIndex = cell.getColumnIndex();
+                // System.out.println("CELL NUM_COLMUNA: " + cellColumnIndex);
+
                 String cellValue = dataFormatter.formatCellValue(cell);
-                System.out.print(cellValue + "\t");
+
+                if (cellColumnIndex == 2) {
+
+                    //System.out.print(cellValue + "\t");
+                    if (cellValue.equals(nombre)) {
+
+                        if (foundNombre.isEmpty()) {
+                            nombreInNOMBRES = true;
+                            foundNombre = cellValue;
+                        }
+
+                    } else {
+                        if (foundNombre.isEmpty()) {
+                            nombreInNOMBRES = false;
+
+                            foundNombre = "";
+                        }
+
+                    }
+
+                    // System.out.print(cellValue + "\t");
+                    if (cellValue.equals(paterno)) {
+                        if (foundPaterno.isEmpty()) {
+                            paternoInNOMBRES = true;
+                            foundPaterno = cellValue;
+                        }
+                    } else {
+                        if (foundPaterno.isEmpty()) {
+                            paternoInNOMBRES = false;
+
+                            foundPaterno = "";
+                        }
+
+                    }
+
+                    if (cellValue.equals(materno)) {
+                        if (foundMaterno.isEmpty()) {
+                            maternoInNOMBRES = true;
+                            foundMaterno = cellValue;
+                        }
+                    } else {
+                        if (foundMaterno.isEmpty()) {
+                            paternoInNOMBRES = false;
+                            foundMaterno = "";
+                        }
+
+                    }
+
+                }
+
+                if (cellColumnIndex == 3) {
+
+                    //System.out.print(cellValue + "\t");
+                    if (cellValue.equals(nombre)) {
+                        if (foundNombre.isEmpty()) {
+                            nombreInPATERNOS = true;
+                            foundNombre = cellValue;
+                        }
+                    } else {
+
+                        if (foundNombre.isEmpty()) {
+                            nombreInPATERNOS = false;
+
+                            foundNombre = "";
+                        }
+
+                    }
+
+                    if (cellValue.equals(paterno)) {
+
+                        if (foundPaterno.isEmpty()) {
+                            paternoInPATERNOS = true;
+                            foundPaterno = cellValue;
+                        }
+                    } else {
+
+                        if (foundPaterno.isEmpty()) {
+                            paternoInPATERNOS = false;
+
+                            foundPaterno = "";
+                        }
+                    }
+
+                    if (cellValue.equals(materno)) {
+                        if (foundMaterno.isEmpty()) {
+                            maternoInPATERNOS = true;
+                            foundMaterno = cellValue;
+                        }
+                    } else {
+                        if (foundMaterno.isEmpty()) {
+                            maternoInPATERNOS = false;
+
+                            foundMaterno = "";
+                        }
+
+                    }
+
+                }
+
+                if (cellColumnIndex == 4) {
+
+                    //System.out.print(cellValue + "\t");
+                    if (cellValue.equals(nombre)) {
+                        if (foundNombre.isEmpty()) {
+                            nombreInMATERNOS = true;
+                            foundNombre = cellValue;
+                        }
+                    } else {
+                        if (foundNombre.isEmpty()) {
+                            nombreInMATERNOS = false;
+
+                            foundNombre = "";
+                        }
+                    }
+
+                    if (cellValue.equals(paterno)) {
+                        if (foundPaterno.isEmpty()) {
+                            paternoInMATERNOS = true;
+                            foundPaterno = cellValue;
+                        }
+                    } else {
+                        if (foundPaterno.isEmpty()) {
+                            paternoInMATERNOS = false;
+
+                            foundPaterno = "";
+                        }
+                    }
+
+                    if (cellValue.equals(materno)) {
+                        if (foundMaterno.isEmpty()) {
+                            maternoInMATERNOS = true;
+                            foundMaterno = cellValue;
+                        }
+                    } else {
+                        if (foundMaterno.isEmpty()) {
+                            maternoInMATERNOS = false;
+
+                            foundMaterno = "";
+                        }
+
+                    }
+
+                }
+
             }
-            System.out.println();
+
+            if (nombreInNOMBRES || nombreInPATERNOS || nombreInMATERNOS) {
+
+                NOMBRES = true;
+            }
+
+            if (paternoInNOMBRES || paternoInPATERNOS || paternoInMATERNOS) {
+
+                PATERNOS = true;
+            }
+
+            if (maternoInNOMBRES || maternoInPATERNOS || maternoInMATERNOS) {
+
+                MATERNOS = true;
+            }
+
+            if (NOMBRES && PATERNOS && MATERNOS) {
+                //System.out.print(cellValue + "\t");
+
+                System.out.print(foundNombre + "\t" + foundPaterno + "\t" + foundMaterno);
+                  System.out.println();
+
+            }
+
+            foundNombre = "";
+            foundPaterno = "";
+            foundMaterno = "";
+
+            nombreInNOMBRES = false;
+            nombreInPATERNOS = false;
+            nombreInMATERNOS = false;
+
+            paternoInNOMBRES = false;
+            paternoInPATERNOS = false;
+            paternoInMATERNOS = false;
+
+            maternoInNOMBRES = false;
+            maternoInPATERNOS = false;
+            maternoInMATERNOS = false;
+
+            NOMBRES = false;
+            PATERNOS = false;
+            MATERNOS = false;
+
+       
         }
 
-        // 3. Or you can use Java 8 forEach loop with lambda
-        System.out.println("\n\nIterating over Rows and Columns using Java 8 forEach with lambda\n");
-        sheet.forEach(row -> {
-            row.forEach(cell -> {
-                printCellValue(cell);
-            });
-            System.out.println();
-        });
-
+      
         // Closing the workbook
         workbook.close();
     }
